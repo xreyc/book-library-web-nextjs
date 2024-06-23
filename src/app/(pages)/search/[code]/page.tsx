@@ -9,7 +9,7 @@ import { useCallback, useEffect, useState } from "react";
 
 export default function Search({ params }: { params: { code: string } }) {
 	const searchParams = useSearchParams();
-	const someQueryParam = searchParams.get('searchkey');
+	const searchkey = searchParams.get('searchkey');
 
 	const [catCode, setCatCode] = useState<string>();
 	const [bookResult, setBookResult] = useState<BookInterface[]>([]);
@@ -17,12 +17,23 @@ export default function Search({ params }: { params: { code: string } }) {
 	const getBooks = useCallback(() => {
 		const bookList = [...books];
 		if (params.code == "all") {
-			setBookResult(bookList);
+			if (searchkey == "" || searchkey == null) {
+				setBookResult(bookList);
+			} else {
+				const filteredList = bookList.filter(item => item.title.toLowerCase().includes(searchkey.toLowerCase()));
+				setBookResult(filteredList);
+			}
 		} else {
 			const filterByGenre = bookList.filter(item => item.gcode == params.code.replaceAll("%20", " "));
-			setBookResult(filterByGenre);
+			if (searchkey == "" || searchkey == null) {
+				setBookResult(filterByGenre);
+			} else {
+				const filteredList = filterByGenre.filter(item => item.title.toLowerCase().includes(searchkey.toLowerCase()));
+				setBookResult(filteredList);
+			}
+
 		}
-	}, [params.code]);
+	}, [params.code, searchkey]);
 
 	const getCode = useCallback(() => {
 		setCatCode(params.code.replaceAll("%20", " "));
@@ -38,7 +49,7 @@ export default function Search({ params }: { params: { code: string } }) {
 		<main className="flex min-h-screen items-start">
 			<div className="max-lg:hidden"><SideBar /></div>
 			<div className="flex flex-col max-w-full flex-grow">
-				<Header code={catCode} searchInput={someQueryParam ?? ""} />
+				<Header code={catCode} searchInput={searchkey ?? ""} />
 
 				<div className="flex flex-col gap-[50px] px-[46px] py-[10px] overflow-y-scroll h-[calc(100vh-77px)] max-lg:h-[calc(100vh-167px)]">
 
