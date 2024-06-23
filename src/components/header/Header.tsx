@@ -64,7 +64,13 @@ const Header: React.FC<Props> = ({ code, searchInput }) => {
 				</div>
 			</div>
 			<div className="px-[46px] py-[20px] lg:hidden">
-				<Input placeholder="Search" className="w-full" />
+				<Input
+					placeholder="Search"
+					className="w-full"
+					value={searchKey}
+					onChange={(event) => setSearchKey(event.target.value)}
+					onKeyDown={handleKeyDown}
+				/>
 			</div>
 		</>
 	);
