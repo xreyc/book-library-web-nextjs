@@ -1,19 +1,21 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import { useRouter } from "next/navigation";
 import { LuChevronDown } from 'react-icons/lu';
 import styles from './Sidebar.module.css';
 
 const genres = [
-	{ code: 'genre_uid1', name: 'Fiction' },
-	{ code: 'genre_uid2', name: 'Novel' },
-	{ code: 'genre_uid3', name: 'Science Fiction' },
-	{ code: 'genre_uid4', name: 'Non-Fiction' },
-	{ code: 'genre_uid5', name: 'General Fiction' },
-	{ code: 'genre_uid6', name: 'Genre-Fiction' },
-	{ code: 'genre_uid7', name: 'Mystery' },
-	{ code: 'genre_uid8', name: 'Young Adult Fiction' },
-	{ code: 'genre_uid9', name: 'Romance Novel' },
-	{ code: 'genre_uid10', name: 'Horor' },
+	{ code: 'all', name: 'All' },
+	{ code: 'fiction', name: 'Fiction' },
+	{ code: 'novel', name: 'Novel' },
+	{ code: 'science fiction', name: 'Science Fiction' },
+	{ code: 'non-fiction', name: 'Non-Fiction' },
+	{ code: 'general fiction', name: 'General Fiction' },
+	{ code: 'genre-fiction', name: 'Genre-Fiction' },
+	{ code: 'mystery', name: 'Mystery' },
+	{ code: 'young adult fiction', name: 'Young Adult Fiction' },
+	{ code: 'romance novel', name: 'Romance Novel' },
+	{ code: 'horror', name: 'Horror' },
 ];
 
 const authors = [
@@ -25,9 +27,13 @@ const authors = [
 ];
 
 const SideBar = () => {
+	const router = useRouter();
+
 	return (
 		<div className={`${styles['sidebar']} flex flex-col gap-[10px] lg:border-r`}>
-			<div className="py-[20px] text-[24px] mx-[24px]"><span className='font-bold'>BOOK</span>LIBRARY</div>
+			<div className="py-[20px] text-[24px] mx-[24px] cursor-pointer" onClick={() => router.push("/")}>
+				<span className='font-bold'>BOOK</span>LIBRARY
+			</div>
 
 			<ScrollArea>
 				<div className="flex flex-col gap-[40px] text-[17px]">
@@ -35,7 +41,13 @@ const SideBar = () => {
 					<div className="flex flex-col gap-[17px]">
 						<div className="font-bold mx-[24px]">Genres</div>
 						<div className="flex flex-col gap-[15px] mx-[24px]">
-							{genres.map(item => <div key={item.code} className="hover:font-semibold hover:text-yellow-700 cursor-pointer">{item.name}</div>)}
+							{genres.map(item => <div
+								key={item.code}
+								className="hover:font-semibold hover:text-yellow-700 cursor-pointer"
+								onClick={() => router.push("/search/" + item.code)}
+							>
+								{item.name}
+							</div>)}
 						</div>
 						<div className="flex justify-between  mx-[24px]">
 							<span>See all</span>
@@ -46,7 +58,11 @@ const SideBar = () => {
 					<div className="flex flex-col gap-[17px] pb-10">
 						<div className="font-bold mx-[24px]">Popular Writers</div>
 						<div className="flex flex-col gap-[20px] mx-[24px]">
-							{authors.map(item => <div key={item.userId} className="flex items-center gap-3">
+							{authors.map(item => <div
+								key={item.userId}
+								className="flex items-center gap-3"
+								onClick={() => router.push("/search/all")}
+							>
 								<div>
 									<Avatar className="h-[27px] w-[27px]">
 										<AvatarImage src={item.profileUrl} />

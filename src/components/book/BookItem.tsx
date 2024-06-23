@@ -12,11 +12,12 @@ import {
 
 interface Props {
 	title: string;
+	author: string;
 	cover: string;
 	rating: number;
 }
 
-const BookItem: React.FC<Props> = ({ title, cover, rating }) => {
+const BookItem: React.FC<Props> = ({ title, author, cover, rating }) => {
 	const [open, setOpen] = useState<boolean>(false);
 
 	return (
@@ -35,9 +36,10 @@ const BookItem: React.FC<Props> = ({ title, cover, rating }) => {
 									className="h-[300px]"
 								/>
 							</div>
-							<div className="font-bold mb-[10px]">
+							<div className="text-[17px] font-bold mb-[5px]">
 								{title}
 							</div>
+							<div>{author}</div>
 							<div className="flex gap-[2px]">
 								<FaStar color={rating >= 1 ? "FFD704" : "AAA89F"} size={15} />
 								<FaStar color={rating >= 2 ? "FFD704" : "AAA89F"} size={15} />
@@ -56,9 +58,10 @@ const BookItem: React.FC<Props> = ({ title, cover, rating }) => {
 				<div className="flex justify-center bg-gray-100 hover:drop-shadow-[0_10px_50px_rgba(100,100,0,0.25)] hover:border-2 hover:border-slate-800 mb-[15px]">
 					<Image src={cover} width={149} height={233} alt="Cover" />
 				</div>
-				<div className="hover:font-bold mb-[10px]">
+				<div className="hover:font-bold">
 					{title}
 				</div>
+				<div className="text-[14px] text-gray-500">{author}</div>
 				<div className="flex gap-[2px]">
 					<FaStar color={rating >= 1 ? "FFD704" : "AAA89F"} size={15} />
 					<FaStar color={rating >= 2 ? "FFD704" : "AAA89F"} size={15} />

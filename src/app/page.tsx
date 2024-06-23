@@ -41,14 +41,14 @@ export default function Home() {
 					<div className="flex flex-col gap-[20px]">
 						<div className="text-[24px] font-bold">MOST POPULAR</div>
 						<div className="grid grid-cols-5  max-[400px]:grid-cols-1 max-sm:grid-cols-2 max-md:grid-cols-3 max-xl:grid-cols-4 gap-[30px]">
-							{mostPopular.map(item => <BookItem key={`mp-${item.id}`} title={item.title} cover={item.cover} rating={item.rating} />)}
+							{mostPopular.map(item => <BookItem key={`mp-${item.id}`} title={item.title} author={item.author} cover={item.cover} rating={item.rating} />)}
 						</div>
 					</div>
 
 					<div className="flex flex-col gap-[20px] pb-20">
 						<div className="text-[24px] font-bold">RECOMMENDED</div>
 						<div className="grid grid-cols-5  max-[400px]:grid-cols-1 max-sm:grid-cols-2 max-md:grid-cols-3 max-xl:grid-cols-4 gap-[30px]">
-							{recommended.map(item => <BookItem key={`re-${item.id}`} title={item.title} cover={item.cover} rating={item.rating} />)}
+							{recommended.map(item => <BookItem key={`re-${item.id}`} title={item.title} author={item.author} cover={item.cover} rating={item.rating} />)}
 						</div>
 					</div>
 
