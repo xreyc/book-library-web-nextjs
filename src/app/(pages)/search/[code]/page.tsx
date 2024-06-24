@@ -68,7 +68,7 @@ export default function SearchPage({ params }: { params: { code: string } }) {
 
 					<div className="flex flex-col gap-[20px] mb-[50px]">
 						<div className="text-[24px] font-bold">
-							{catCode == "all" ? searchAuthor != "" || searchAuthor != null ? `Books written by ${searchAuthor}` : "ALL CATEGORIES" : catCode?.toUpperCase()}
+							{catCode == "all" ? searchAuthor != "" && searchAuthor != null ? `Books written by ${searchAuthor}` : "ALL CATEGORIES" : catCode?.toUpperCase()}
 						</div>
 						<div className="grid grid-cols-5 max-[400px]:grid-cols-1 max-sm:grid-cols-2 max-md:grid-cols-3 max-xl:grid-cols-4 gap-[50px]">
 							{bookResult.map(item => <BookItem key={`mp-${item.id}`} title={item.title} author={item.author} cover={item.cover} rating={item.rating} />)}
