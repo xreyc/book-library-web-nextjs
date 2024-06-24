@@ -1,6 +1,7 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { useRouter } from "next/navigation";
+import React from "react";
 import { LuChevronDown } from 'react-icons/lu';
 import styles from './Sidebar.module.css';
 
@@ -26,7 +27,11 @@ const authors = [
 	{ userId: 'author_uid5', name: 'Jake Blentlemen', profileUrl: '/profile5.jpg' },
 ];
 
-const SideBar = () => {
+interface Props {
+	code?: string;
+}
+
+const SideBar: React.FC<Props> = ({ code }) => {
 	const router = useRouter();
 
 	return (
@@ -43,7 +48,7 @@ const SideBar = () => {
 						<div className="flex flex-col gap-[15px] mx-[24px]">
 							{genres.map(item => <div
 								key={item.code}
-								className="hover:font-semibold hover:text-yellow-700 cursor-pointer"
+								className={`hover:font-semibold hover:text-yellow-700 cursor-pointer ${code != '' || code != null ? item.code == code ? 'font-semibold text-teal-500' : '' : ''}`}
 								onClick={() => router.push("/search/" + item.code)}
 							>
 								{item.name}

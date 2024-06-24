@@ -60,7 +60,7 @@ export default function SearchPage({ params }: { params: { code: string } }) {
 
 	return (
 		<main className="flex min-h-screen items-start">
-			<div className="max-lg:hidden"><SideBar /></div>
+			<div className="max-lg:hidden"><SideBar code={catCode} /></div>
 			<div className="flex flex-col max-w-full flex-grow">
 				<Header code={catCode} searchInput={searchkey ?? ""} />
 
