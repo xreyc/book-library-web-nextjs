@@ -60,8 +60,8 @@ const SideBar = () => {
 						<div className="flex flex-col gap-[20px] mx-[24px]">
 							{authors.map(item => <div
 								key={item.userId}
-								className="flex items-center gap-3"
-								onClick={() => router.push("/search/all")}
+								className="flex items-center gap-3 cursor-pointer"
+								onClick={() => router.push("/search/all?searchkey=&author=" + item.name)}
 							>
 								<div>
 									<Avatar className="h-[27px] w-[27px]">
